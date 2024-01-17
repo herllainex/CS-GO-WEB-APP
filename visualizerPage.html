@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Accordion Navigation</title>
+  <style>
+    /* Basic styling */
+    body {
+        background-image: url("Images/gradientBackground2.jpg");
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        display: flex;
+        height: 100vh;
+    }
+    
+    /* Navigation accordion styles */
+    .accordion {
+        width: 250px;
+        overflow: hidden; 
+        background: rgba(253, 255, 253, 0.671);  
+    }
+   
+    .accordion-logo {
+        display: flex;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        align-items: center;
+        justify-content: center;
+        height: 150px;
+    }
+
+    .logo {
+        max-width: 80%;
+        max-height: 80%;   
+    }
+
+    .accordion button {
+        width: 100%;
+        padding: 12px;
+        text-align: left;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        /*transition: background-color 0.3s;*/
+        position: relative;
+        background: rgba(253, 255, 253, 0);
+        font-family: 'Inter', sans-serif; /* Change font to Inter */
+        font-weight: bold;
+        color: #7E8082;
+        padding-left: 15%;
+        
+    }
+
+    .accordion button .button-image {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        max-width: 24px;
+        max-height: 24px;
+    }
+
+    .accordion button:hover {
+        background-color: #d7e5fa;
+    }
+
+    
+    .accordion button.active {
+        background-color: #d7e5fa; /* A light blue color when active */
+      color: #000; /* Change the text color to black when active */
+      transition: background-color 0.3s, color 0.3s;
+        }
+    
+    .accordion-content {
+        padding: 0 18px;
+        display: none;
+        background: rgba(253, 255, 253, 0);
+    }
+    
+    /* Show the accordion content when the button is clicked */
+    .active {
+        display: block;
+    }
+    
+    /* Content section */
+    .content {
+        flex-grow: 1;
+        padding: 20px;
+        
+    }
+
+  </style>
+  <script>
+
+     // Function to load HTML content into the content area
+     function loadContent(url) {
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          document.querySelector('.content').innerHTML = html;
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        });
+    }
+
+
+    // Function to toggle the accordion content and load HTML content
+    // function toggleAccordion(index, url) {
+    //  var accordionContent = document.getElementsByClassName("accordion-content");
+    //  accordionContent[index].classList.toggle("active");
+    //  loadContent(url);
+    // }
+
+    function toggleAccordion(index, url) {
+      var accordionContent = document.getElementsByClassName("accordion-content");
+      for (var i = 0; i < accordionContent.length; i++) {
+        if (i === index) {
+          accordionContent[i].classList.toggle("active", true);
+        } else {
+          accordionContent[i].classList.remove("active");
+        }
+      }
+      loadContent(url);
+    }
+
+    function loadLinkedList() {
+        var frame = document.getElementById("myFrame");
+        frame.src = "linkedlist.html";
+    }
+    function loadstack() {
+        var frame = document.getElementById("myFrame");
+        frame.src = "stack.html";
+    }
+    function loadqueue() {
+        var frame = document.getElementById("myFrame");
+        frame.src = "Queue.html";
+    }
+    function loadsorting() {
+        var frame = document.getElementById("myFrame");
+        frame.src = "sorting.html";
+    }
+    function loadgraphtraversal(){
+        var frame = document.getElementById("myFrame");
+        frame.src = "graphtraversal.html";
+    }
+    function loadarray() {
+        var frame = document.getElementById("myFrame");
+        frame.src = "linearList.html";
+    }
+
+
+  </script>
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="accordion" >
+            <div class="accordion-logo">
+                <img src="Images/logoshadow.svg" class="logo" alt="Logo">
+            </div>
+            
+            <button onclick="loadstack()"> Stack </button>
+            <button onclick="loadqueue()">Queue</button>
+            <button onclick="loadarray()"> Array </button>
+            <button onclick="loadLinkedList()"> Linked List</button>
+            
+            <!-- Accordion buttons -->
+            <button onclick="toggleAccordion(0)"> Indexing <img src="Images/caret-down.png" alt="Image" class="button-image"></button>
+            <div class="accordion-content">
+                <button>Binary Search</button>
+                <button>Linear Search</button>
+            </div>
+            
+            <button onclick="loadsorting()"> Sorting <img src="Images/caret-down.png" alt="Image" class="button-image"></button>
+            <div class="accordion-content"> 
+                <!-- <button>Bubble Sort</button> -->
+                <button onclick="loadsorting()">Selection Sort</button>
+                <button>Insertion Sort</button>
+                <!-- <button>Merge Sort</button>
+                <button>Selection Sort</button> -->
+            </div>
+            
+            <button onclick="loadgraphtraversal()"> Graph Traversal<img src="Images/caret-down.png" alt="Image" class="button-image"> </button>
+            <div class="accordion-content">
+                <button onclick="loadgraphtraversal()">DFS </button>
+                <button> BFS </button>
+            </div>
+        </div>
+        
+        <!-- frame -->
+        <div class="content">
+            <iframe id="myFrame" frameborder="0" scrolling="yes" width="100%" height="100%" title="Iframe Example"></iframe>
+        </div>
+    </div>
+</body>
+</html>

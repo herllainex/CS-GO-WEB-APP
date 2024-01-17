@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("Images/gradientBackground.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10%;
+        }
+
+        .logo {
+            width: 200px; /* Adjust the width of the logo as needed */
+            height: 200px; /* Adjust the height of the logo as needed */
+            padding-top: 10%;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            padding: 10px 20px;
+            background-color: #3F62FE;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px; 
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        .button img {
+            margin-left: 5px;
+            height: 20px; /* Adjust the height of the image as needed */
+        }
+
+        h1 {
+            font-family: 'Raleway', sans-serif;
+            color: #3F62FE;
+        }
+
+        .visDescription {
+            margin-top: 5%;
+            display: flex;
+            width: 60%;
+            height: auto;
+            transition: transform 0.3s; /* Add a smooth transition effect */
+        }
+
+        .visDescription:hover {
+            transform: scale(1.1);
+        }
+
+        
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Your webpage content here -->
+    <img src="Images/csgo.png" class="logo" alt="Logo">
+
+    <h1> Data Structure Visualizer</h1>
+
+    <div class="button-container">
+        <a href="visualizerPage.html">
+            <button class="button">
+                DSA Simulation
+                <img src="Images/arrowCircle.png" alt="Image">
+            </button>
+        </a>
+
+        <button class="button">
+            Code Visualizer  
+            <img src="Images/arrowCircle.png" alt="Image">
+            </button>
+    </div>
+
+    <img src="Images/sorting.png" class="visDescription">
+    <img src="Images/Searching.png" class="visDescription">
+    <img src="Images/array.png" class="visDescription">
+    <img src="Images/queque.png" class="visDescription">
+    <img src="Images/stack.png" class="visDescription">
+</body>
+</html>

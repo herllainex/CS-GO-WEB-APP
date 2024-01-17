@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<style>
+        .menu {
+          display: none;
+          position: absolute;
+          padding-right: 20%;
+          background-color: rgb(202, 238, 242);
+          padding: 5px;
+          z-index: 1;
+          margin-top: 5px;
+          margin-right: 20px;
+          border-radius: 10px;
+        }
+    
+        .menu button{
+            display: inline-block;
+            background-color: #a6defc;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .menu button:hover{
+            transform: scale(1.1);
+        }
+    
+        button:hover + .menu, .menu:hover {
+          display: block;
+          
+        }
+    </style>
+
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <script src="../jquery.js"></script>
+	<script src="../index.js"></script>
+	<script type = "application/javascript" src = "../js/AnimationManager.js"> </script>
+    <script type = "application/javascript" src = "../js/ObjectManager.js"> </script>
+    <script type = "application/javascript" src = "../js/AnimatedObject.js"> </script>
+    <script type = "application/javascript" src = "../js/AnimatedCircle.js"> </script>
+    <script type = "application/javascript" src = "../js/AnimatedLine.js"> </script>
+    <script type = "application/javascript" src = "../js/AnimatedRectangle.js"> </script>
+    <script type = "application/javascript" src = "../js/AnimatedPointer.js"> </script>
+    <script type = "application/javascript" src = "../js/AnimatedLabel.js"> </script>
+    <script type = "application/javascript" src = "../js/Algorithm.js"> </script>
+    <script type = "application/javascript" src = "../js/OrderList.js"> </script>
+	<!--css-->
+    <link rel="stylesheet" href="../css/index.css" />
+	<link rel="shortcut icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/viz.css">
+    <link rel="stylesheet" href="css/list.css">
+	<title>Linear table</title>
+	<script>
+          var type=0;
+          var index;
+	</script>
+	 <script>
+        function toggleAccordion(accordionId) {
+            var accordionContent = document.getElementById(accordionId);
+            accordionContent.classList.toggle("active");
+            }
+    </script>
+</head>
+<body onload="init();ini();">
+	<div class="mainSub">
+		<div id="">
+			<button class="create button starts ">
+				<p class=" r1">Create</p>
+			</button>
+			<button class="insert button starts">
+				<p class="r2">Insert</p>
+			</button>
+			<button class="delete button starts">
+				<p class="r3">Delete</p>
+			</button>
+		</div>
+
+		<!-- Create Sub -->
+			<div class="length subR1">
+				<span>Length</span><input type="text" class="inputLength"/>
+			</div>	
+			<div class="init subR1">
+				<p>Initialize</p?>
+			</div>
+	
+		<!-- Insert Sub -->
+		<div class="serialNumber subR2"> 
+			<span>Location</span>
+			<input type="text" class="inputNumber"/>
+		</div>
+		<div class="insertNumber subR2">
+			<span>Value</span>
+			<input type="text" class="inputInsertNumber"/>
+		</div>
+		<div class="insertGo subR2">
+			<p>Insert</p>
+		</div>
+		<div class="deleteNumber subR3">
+			<span>Location</span>
+			<input type="text" class="inputDeleteNumber"/>
+		</div>
+		<div class="deleteGo subR3">
+			<p>Delete</p>
+		</div> 
+	
+		<div class="state">
+			<p></p>
+		</div>
+		
+		<div class="showBox"  >
+            <canvas id="drawing" width="2000" height="1000">Canvas</canvas>
+		</div>
+		<!-- <div class="codeHide">
+			<img src="../image/arrow_white_right.png" alt="" />
+		</div> -->
+		
+		<!-- <div class="codes">
+			<p>xx</p>
+			<p>xx</p>
+			<p>xx</p>
+			<p>xx</p>
+			<p>xx</p>
+			<p>xx</p>
+	    </div> -->
+		
+	    <!-- <div class="controlBar">
+	    	<input type="range" name="controlSlider" id="controlSlider"  min="1" max="100" value="60" onchange="setAnimationSpeed(this.value);" />
+	    </div> -->
+		<!-- Bottom bar and overlay popups -->
+	<div id="media-controls" class="partition">
+		<div id="speed-control" class="media-control-button">slow<div id="speed-input"></div>fast</div>
+		<span id="go-to-beginning" class="media-control-button" title="go to beginning" onclick=goToBeginning()><img src="img/goToBeginning.png" alt="go to beginning" /></span>
+		<span id="previous" class="media-control-button" title="step backward" onclick=stepBackward()><img src="img/prevFrame.png" alt="previous frame" /></span>
+		<span id="pause" class="media-control-button" title="pause" onclick=pause()><img src="img/pause.png" alt="pause" /></span>
+		<span id="play" class="media-control-button" title="play" onclick=play()><img src="img/play.png" alt="play" /></span>
+		<span id="next" class="media-control-button" title="step forward" onclick=stepForward()><img src="img/nextFrame.png" alt="next frame" /></span>
+		<span id="go-to-end" class="media-control-button" title="go to end" onclick=goToEnd()><img src="img/goToEnd.png" alt="go to end"/></span>
+		<div id="progress-bar" class="media-control-button"></div>
+	</div>
+
+	<div class="flex-container">
+		<!-- pseudocode -->
+		<div id="codetrace" class="flex-item">
+		<!--can add class "highlighed" to hightlight one line-->
+			<p id="code1" style="padding-top: 10px;"></p>
+			<p id="code2" ></p>
+			<p id="code3"></p>
+			<p id="code4"></p>
+			<p id="code5"></p>
+			<p id="code6"></p>
+			<p id="code7" style="padding-bottom: 10px;"></p>
+		</div>
+		
+		<div class="flex-item">
+			<p>
+				A linked list is a linear data structure, in which the elements are not stored at contiguous memory locations. The elements in a linked list are linked using pointers as shown in the below image:
+
+			</p>
+		<!-- <div id="codetrace-hide" class="panel-hide"><img src="img/arrow_white_right.png" title="show/hide codetrace panel"/></div> -->
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		
+	</script>
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256898616'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1256898616' type='text/javascript'%3E%3C/script%3E"));</script>
+</body>
+</html>
